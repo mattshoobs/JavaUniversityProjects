@@ -1,6 +1,5 @@
 package CS251_HW3;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CardGame {
@@ -8,21 +7,37 @@ public class CardGame {
 	private static final String[] cardNumbers = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 	private static final String[] cardSuits = {"D","H","C","S"};
     private static final int DEFAULT_PLAYERS = 2;
-	
-	private boolean deck[];
+
+    private boolean deck[];
 	private String[][] players;
-	private int cardsdealt;
+	private int cardsDealt;
 	private boolean hasDealtCards;
 	
 
 	public CardGame (int totalPlayers) {
 		totalPlayers          = totalPlayers <= 8 && totalPlayers >= 2 ? totalPlayers : DEFAULT_PLAYERS;
-		this.players          = totalPlayers;
 		this.deck             = new boolean[52];
 		this.players          = new String[totalPlayers][5];
-		this.cardsdealt       = 0;
+		this.cardsDealt = 0;
 		this.resetDeck(this.deck);
 	}
+
+
+    /**
+     * Getter for cardsDealt variable
+     * @return cards dealt
+     */
+    public int getTotalCardsdealt() {
+        return this.cardsDealt;
+    }
+
+    /**
+     * Getter for hasDealtCards
+     * @return
+     */
+    private boolean isHasDealtCards() {
+        return hasDealtCards;
+    }
 
     /**
      * Private setter for hasCardsDealt
@@ -33,16 +48,23 @@ public class CardGame {
     }
 
     /**
+     * Private setter for cardsDealt
+     * @param cardsDealt
+     */
+    private void setCardsDealt(int cardsDealt) { this.cardsDealt = cardsDealt; }
+
+    /**
 	 * Reset the deck for the next round.
 	 * Think of this as collecting all the cards.
 	 * A card is in the deck if it's value is true.
 	 * 
 	 * @param boolean [] deck
 	 */
-	public static void resetDeck(boolean[] deck){	
+	public void resetDeck(boolean[] deck){
 
-	    Arrays.fill(deck, Boolean.FALSE);
+	    Arrays.fill(deck, Boolean.TRUE);
 	    this.setHasDealtCards(false);
+	    this.setCardsDealt(0);
 	}
 
 	
@@ -55,13 +77,14 @@ public class CardGame {
 	 * @param players
 	 * @param deck
 	 */
-	public static void dealHands(String[][] players, boolean[] deck){
-		
-		for(int i = 0; i<players.length; i++){
-			for(int k = 0; k<players[i].length; k++){
-				 players[i][k] = dealCard(deck);	
-			}
-		}
+	public void dealHands(String[][] players, boolean[] deck){
+        if(!this.isHasDealtCards()){
+            for(int i = 0; i<players.length; i++){
+                for(int k = 0; k<players[i].length; k++){
+                     players[i][k] = dealCard(deck);
+                }
+            }
+		} else {System.out.print("\n* Cards have already been dealt. *\n");}
 	}
 
 	
@@ -75,12 +98,14 @@ public class CardGame {
 	 * @param deck
 	 * @return String
 	 */
-	public static String dealCard(boolean[] deck){
+	private String dealCard(boolean[] deck){
 			
 		while(true){
 		    int tempCard = ThreadLocalRandom.current().nextInt(0, 52);
-		    if(deck[tempCard] == true)
-		        return convertCard(tempCard);
+		    if(deck[tempCard]) {
+		        deck[tempCard] = false;
+                return convertCard(tempCard);
+            }
 		}
 		
 	}
@@ -98,7 +123,7 @@ public class CardGame {
 	 * @param card
 	 * @return String representing a card in correct format
 	 */
-	public static String convertCard(int card){
+	private String convertCard(int card){
 		
 		return cardSuits[card%4] + cardNumbers[card%13];
 	}
@@ -110,7 +135,7 @@ public class CardGame {
 	 * 
 	 * @param players
 	 */
-	public static void displayHands(String[][] players){
+	public void displayHands(String[][] players){
 
 		String output = "";
 		for(int i = 0; i<players.length; i++){
@@ -122,7 +147,26 @@ public class CardGame {
 		}
 		System.out.print(output);
 	}
-	
+
+    /**
+     * Add the the passed number of players to the game. With the addition the new total players must not exceed 8 and
+     * it must not decrease the previous number of players.
+     * @param playersToAdd
+     */
+	public void addPlayers(int playersToAdd){
+	    if(playersToAdd < 0 || this.players.length + playersToAdd > 8){
+            System.out.print("\n* Invalid player addition. *\nParameter must not be negative and " +
+                    "new total must not exceed 8 players total.");
+            return;
+        }
+        this.players = Arrays.copyOf(this.players, this.players.length + playersToAdd);
+
+        for(int i = this.players.length - (playersToAdd+1); i<this.players.length; i++){
+            for(int k = 0; k<this.players[i].length; k++){
+                this.players[i][k] = dealCard(this.deck);
+            }
+        }
+    }
 	
 	
 }
