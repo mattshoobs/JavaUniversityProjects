@@ -55,7 +55,6 @@ public class CardGame {
 	 */
 	public static String[][] playerPrompt (Scanner scr){
 		
-		//TODO
 		int players;
 		
 		do { 
@@ -86,8 +85,6 @@ public class CardGame {
 
 	public static boolean playerRePrompt (Scanner scr){
 		
-		//TODO
-		
 		System.out.print("\nWould you like to deal again? Type no to quit. ");
 		
 		return !(scr.next().equalsIgnoreCase("no"));
@@ -103,7 +100,6 @@ public class CardGame {
 	 */
 	public static void resetDeck(boolean[] deck){
 		
-		//TODO
 		/**for(int i = 0; i<deck.length; i++){
 			deck[i] = true;
 		}*/
@@ -125,7 +121,6 @@ public class CardGame {
 	 */
 	public static void dealHands(String[][] players, boolean[] deck){
 		
-		//TODO
 		for(int i = 0; i<players.length; i++){
 			for(int k = 0; k<players[i].length; k++){
 				 players[i][k] = dealCard(deck);	
@@ -145,8 +140,7 @@ public class CardGame {
 	 * @return String
 	 */
 	public static String dealCard(boolean[] deck){
-		
-		//TODO
+			
 		while(true){
 		    int tempCard = ThreadLocalRandom.current().nextInt(0, 52);
 		    if(deck[tempCard] == true)
@@ -170,7 +164,6 @@ public class CardGame {
 	 */
 	public static String convertCard(int card){
 		
-		//TODO
 		return cardSuits[card%4] + cardNumbers[card%13];
 	}
 
@@ -183,7 +176,6 @@ public class CardGame {
 	 */
 	public static void displayHands(String[][] players){
 
-		//TODO
 		String output = "";
 		for(int i = 0; i<players.length; i++){
 			output += String.format("\nPlayer %s hand: ", i+1); 

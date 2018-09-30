@@ -9,6 +9,7 @@ public class Dog {
 	private static int totalWeight;
 	private PetOwner owner;
 	
+	//default constructor
 	public Dog() {
 		this("lab",65,1,"Stanly");
 	}
