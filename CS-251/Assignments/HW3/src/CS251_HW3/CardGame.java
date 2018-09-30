@@ -7,7 +7,7 @@ public class CardGame {
 
 	private static final String[] cardNumbers = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 	private static final String[] cardSuits = {"D","H","C","S"};
-
+    private static final int DEFAULT_PLAYERS = 2;
 	
 	private boolean deck[];
 	private String[][] players;
@@ -16,13 +16,23 @@ public class CardGame {
 	
 
 	public CardGame (int totalPlayers) {
-		
-		this.players = totalPlayers;
-		deck = new boolean[52];
+		totalPlayers          = totalPlayers <= 8 && totalPlayers >= 2 ? totalPlayers : DEFAULT_PLAYERS;
+		this.players          = totalPlayers;
+		this.deck             = new boolean[52];
+		this.players          = new String[totalPlayers][5];
+		this.cardsdealt       = 0;
+		this.resetDeck(this.deck);
 	}
-	
 
-	/**
+    /**
+     * Private setter for hasCardsDealt
+     * @param hasDealtCards
+     */
+    private void setHasDealtCards(boolean hasDealtCards) {
+        this.hasDealtCards = hasDealtCards;
+    }
+
+    /**
 	 * Reset the deck for the next round.
 	 * Think of this as collecting all the cards.
 	 * A card is in the deck if it's value is true.
@@ -30,7 +40,9 @@ public class CardGame {
 	 * @param boolean [] deck
 	 */
 	public static void resetDeck(boolean[] deck){	
-		Arrays.fill(deck, Boolean.FALSE);
+
+	    Arrays.fill(deck, Boolean.FALSE);
+	    this.setHasDealtCards(false);
 	}
 
 	
