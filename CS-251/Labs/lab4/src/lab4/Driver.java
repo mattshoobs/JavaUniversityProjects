@@ -1,4 +1,5 @@
 package lab4;
+
 public class Driver {
 
 	public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class Driver {
 		System.out.println("If done correctly, both averages should be 3.0.\n");
 
 		for(Student s: students) {
-			s.setGPA(3.0);
+			s.setGpa(3.0);
 		}
 
 		System.out.printf("All Students avg = %.2f\n", Student.getStudentAvg());
@@ -54,7 +55,7 @@ public class Driver {
 
 		for(Student s: students) {
 			if(s.getMajor().equals("CompSci"))
-				s.setGPA(4.0);
+				s.setGpa(4.0);
 		}
 
 		System.out.printf("All Students avg = %.2f\n", Student.getStudentAvg());
