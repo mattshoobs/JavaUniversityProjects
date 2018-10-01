@@ -19,7 +19,7 @@ public class CardGame {
 		this.deck             = new boolean[52];
 		this.players          = new String[totalPlayers][5];
 		this.cardsDealt = 0;
-		this.resetDeck(this.deck);
+		this.resetDeck();
 	}
 
 
@@ -57,12 +57,10 @@ public class CardGame {
 	 * Reset the deck for the next round.
 	 * Think of this as collecting all the cards.
 	 * A card is in the deck if it's value is true.
-	 * 
-	 * @param boolean [] deck
 	 */
-	public void resetDeck(boolean[] deck){
+	public void resetDeck(){
 
-	    Arrays.fill(deck, Boolean.TRUE);
+	    Arrays.fill(this.deck, Boolean.TRUE);
 	    this.setHasDealtCards(false);
 	    this.setCardsDealt(0);
 	}
@@ -77,13 +75,14 @@ public class CardGame {
 	 * @param players
 	 * @param deck
 	 */
-	public void dealHands(String[][] players, boolean[] deck){
+	public void dealHands(){
         if(!this.isHasDealtCards()){
-            for(int i = 0; i<players.length; i++){
-                for(int k = 0; k<players[i].length; k++){
-                     players[i][k] = dealCard(deck);
+            for(int i = 0; i<this.players.length; i++){
+                for(int k = 0; k<this.players[i].length; k++){
+                     this.players[i][k] = dealCard();
                 }
             }
+            this.setHasDealtCards(true);
 		} else {System.out.print("\n* Cards have already been dealt. *\n");}
 	}
 
@@ -98,12 +97,12 @@ public class CardGame {
 	 * @param deck
 	 * @return String
 	 */
-	private String dealCard(boolean[] deck){
+	private String dealCard(){
 			
 		while(true){
 		    int tempCard = ThreadLocalRandom.current().nextInt(0, 52);
-		    if(deck[tempCard]) {
-		        deck[tempCard] = false;
+		    if(this.deck[tempCard]) {
+		        this.deck[tempCard] = false;
                 return convertCard(tempCard);
             }
 		}
@@ -135,12 +134,12 @@ public class CardGame {
 	 * 
 	 * @param players
 	 */
-	public void displayHands(String[][] players){
+	public void displayHands(){
 
 		String output = "";
-		for(int i = 0; i<players.length; i++){
+		for(int i = 0; i<this.players.length; i++){
 			output += String.format("\nPlayer %s hand: ", i+1); 
-		    for( String card : players[i]){
+		    for( String card : this.players[i]){
 		        output += card + " ";
 		    }
 		    output += "\n";
@@ -161,9 +160,10 @@ public class CardGame {
         }
         this.players = Arrays.copyOf(this.players, this.players.length + playersToAdd);
 
-        for(int i = this.players.length - (playersToAdd+1); i<this.players.length; i++){
+        for(int i = this.players.length - playersToAdd; i<this.players.length; i++){
+            this.players[i] = new String[5];
             for(int k = 0; k<this.players[i].length; k++){
-                this.players[i][k] = dealCard(this.deck);
+                this.players[i][k] = dealCard();
             }
         }
     }
