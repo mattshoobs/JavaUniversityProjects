@@ -2,9 +2,9 @@ package CS251_HW4;
 
 public class MovieCollection {
 
-	//TODO
-	//Instance Variables
-
+	private Movie[] movies;
+	private int movieCount;
+	
 	/**
 	 * Constructor.
 	 * You are only allowed to hold 10 movies. 
@@ -12,7 +12,9 @@ public class MovieCollection {
 	 */
 	public MovieCollection(){
 
-		//TODO
+		movies = new Movie[10];
+		movieCount++;
+		
 
 	}
 
@@ -23,7 +25,7 @@ public class MovieCollection {
 	 */
 	public int getTotalMovies(){
 		
-		//TODO
+		return this.movieCount;
 		
 	}
 
@@ -39,7 +41,17 @@ public class MovieCollection {
 	 */
 	public boolean addMovie(Movie movie){
 		
-		//TODO
+		if (movie == null || getTotalMovies() >= 10) {
+			System.out.print("Error - You have 10 movies. Please Remove a movie before adding one.");
+			return false;
+		}
+		for (Movie m : movies) {
+			if (m != null && movie.getName().equalsIgnoreCase(m.getName())) {
+				return false;
+			}
+		}
+		//add movie to array
+		return true;
 		
 	}
 

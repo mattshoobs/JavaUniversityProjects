@@ -1,8 +1,7 @@
 package lab3;
 
 public class Movie {
-	// TODO
-	// See handout
+
 	private String name = null;
 	private int minutes = 0;
 	private int tomatoScore = 0;
