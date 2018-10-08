@@ -13,7 +13,6 @@ public class MovieCollection {
 	public MovieCollection(){
 
 		movies = new Movie[10];
-		movieCount++;
 		
 
 	}
@@ -47,10 +46,12 @@ public class MovieCollection {
 		}
 		for (Movie m : movies) {
 			if (m != null && movie.getName().equalsIgnoreCase(m.getName())) {
+				System.out.print("Error - movie alreay exists or movie is undefined.");
 				return false;
 			}
 		}
-		//add movie to array
+		
+		movies[this.movieCount] = movie;
 		return true;
 		
 	}
@@ -68,7 +69,14 @@ public class MovieCollection {
 	 */
 	public boolean addMovieAt(Movie movie, int index){
 
-		//TODO
+		if (index < 0 || index >= 10) {
+			System.out.print("Error - Index is not );
+		}
+		
+		shiftCollectionRight(index);
+		movies[indexthis] = movie;
+		
+		
 		
 	}
 
@@ -82,7 +90,6 @@ public class MovieCollection {
 	 */
 	private void shiftCollectionRight(int index) {
 		
-		//TODO
 		
 	}
 
