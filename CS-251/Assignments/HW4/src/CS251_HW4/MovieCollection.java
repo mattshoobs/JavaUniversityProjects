@@ -4,220 +4,258 @@ public class MovieCollection {
 
 	private Movie[] movies;
 	private int movieCount;
-	
-	/**
-	 * Constructor.
-	 * You are only allowed to hold 10 movies. 
-	 * Initialize the array.
-	 */
-	public MovieCollection(){
 
+	public MovieCollection() {
 		movies = new Movie[10];
-		
-
 	}
 
+	public int getTotalMovies() {
 
-	/**
-	 * Return the total number of movies.
-	 * @return int
-	 */
-	public int getTotalMovies(){
-		
 		return this.movieCount;
-		
 	}
 
-
 	/**
-	 * Add the passed in Movie to your collection if there is space for it.
-	 * You are not allowed duplicate copies of a movie in the array.
-	 * Make sure to check movieCount to make sure it can be added.
-	 * If the movie is added return true.  Else return false.
-	 * 
 	 * @param movie
 	 * @return boolean
 	 */
-	public boolean addMovie(Movie movie){
-		
-		if (movie == null || getTotalMovies() >= 10) {
+	public boolean addMovie(Movie movie) {
+		if (movie == null || this.movieCount >= 10) {
 			System.out.print("Error - You have 10 movies. Please Remove a movie before adding one.");
 			return false;
 		}
-		for (Movie m : movies) {
-			if (m != null && movie.getName().equalsIgnoreCase(m.getName())) {
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
+			if (m == null || m.equals(movie)) {
 				System.out.print("Error - movie alreay exists or movie is undefined.");
 				return false;
+				
 			}
 		}
-		
 		movies[this.movieCount] = movie;
+		movieCount++;
 		return true;
-		
+
 	}
 
-
 	/**
-	 * Add a movie at the specifed index if the index is valid.
-	 * You must verify the index.  Remember, no duplicate movies are allowed.
-	 * You will need to shift all your movies to the right to make room for the new movie.
-	 * Return true if movie was added, false otherwise.
-	 * 
 	 * @param movie
 	 * @param index
 	 * @return boolean
 	 */
-	public boolean addMovieAt(Movie movie, int index){
+	public boolean addMovieAt(Movie movie, int index) {
 
-		if (index < 0 || index >= 10) {
-			System.out.print("Error - Index is not );
+		if (index < 0 || index >= 10 || index > movieCount || movieCount == 10) {
+			System.out.print("Error - Index is not in range, or movies are full.");
+			return false;
 		}
-		
-		shiftCollectionRight(index);
-		movies[indexthis] = movie;
-		
-		
-		
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
+			if (m == null || m.equals(movie)) {
+				System.out.print("Error - movie alreay exists or movie is undefined.");
+				return false;
+				
+			}
+		}
+		if (movies[index] != null) {
+
+			shiftCollectionRight(index);
+		}
+
+		movies[index] = movie;
+		movieCount++;
+		return true;
 	}
 
 	/**
-	 * Shift all movies to the right based on the index passed in.
-	 * This will create 'space' for a new movie to be added.
-	 * Should only be called by addMovieAt().
-	 * Private methods of a class are considered helper methods.
-	 * 
 	 * @param index
 	 */
 	private void shiftCollectionRight(int index) {
-		
-		
+		for (int i = movieCount - 1; i >= index; i--) {
+			movies[i + 1] = movies[i];
+
+		}
+
 	}
 
 	/**
-	 * Find location of the passed in Movie and return its location in the array.
-	 * This means a value from [0, movieCount) could be returned if it is in the array.
-	 * If the movie is not there, return -1 as a value.
-	 * To compare movies, you only need to compare the name and runtime.
-	 * Remember, you can use methods in Movie class to easily compare two movies now.
-	 * 
 	 * @param movie
-	 * @return boolean
+	 * @return int
 	 */
-	public int findMovie(Movie movie){
+	public int findMovie(Movie movie) {
 		
-		//TODO
-		
+		for (int i = 0; i< movieCount; i++) {
+			Movie temp = movies[i];
+			if (movie.equals(temp)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
-
-	/**
-	 * Get the movie at the specified index and return it.
-	 * If the index passed in is invalid, return null.
-	 * No shifting required.
-	 * 
+	/** 
 	 * @param index
 	 * @return Movie
 	 */
 	public Movie getMovieAt(int index) {
-
-		//TODO
-
+		if (index < 0 || index >= 10) {
+			return null;
+		}
+		return movies[index];
 	}
 
-
 	/**
-	 * Remove the passed in Movie if it is there.
-	 * If the movie is there, you will need to "shift" the array backwards one location to "remove" the movie.
-	 * Remember, no null spaces are allowed in the array.
-	 * You will need to call shiftCollectionLeft if you remove a movie.
-	 * This method returns true if the movie is removed, false otherwise.
-	 * 
 	 * @param movie
 	 * @return boolean
 	 */
-	public boolean removeMovie(Movie movie){
-		
-		//TODO
-		
+	public boolean removeMovie(Movie movie) {
+
+		if (movie == null) {
+			System.out.print("Error - Invalid Movie.");
+			return false;
+		}
+		boolean  movieRemoved = false;
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
+			if (m != null && m.equals(movie)) {
+				movieRemoved = true;
+
+				shiftCollectionLeft(i);
+			
+			}	
+		}
+		if (movieRemoved) {
+			movieCount--;
+			return true;
+		}
+		return false;
 	}
 
-
 	/**
-	 * Remove the Movie at the specified index.
-	 * Make sure the index is a valid index.
-	 * You will need to call shiftCollectionLeft to remove the movie.
-	 * Return the Movie that was at this location, or null if an invalid index was used.
-	 * 
 	 * @param index
 	 * @return Movie
 	 */
 	public Movie removeMovieAt(int index) {
 
-		//TODO
-
+		if (index < 0 || index >= 10 || index > movieCount) {
+			System.out.print("Error - Index is not in range.");
+			return null;
+		}
+		
+		Movie m = movies[index];
+		if (m != null) {
+			Movie retval = new Movie(m.getName(), m.getMinutes(), m.getTomatoScore());
+			shiftCollectionLeft(index);
+			movieCount--;
+			return retval;
+				
+		}
+	
+		
+		
+		return null;
 	}
 
 	/**
-	 * Move all elements after the index one location backwards in the array.
-	 * This method is meant to be called by removeMovie() and removeMovieAt() and is private.
-	 * Private methods of a class are considered helper methods.
-	 * The parameter index is meant to be the location of the element to be removed.
-	 * 
 	 * @param index
 	 */
-	private void shiftCollectionLeft(int index){
+	private void shiftCollectionLeft(int index) {
 		
-		//TODO
-		
+		for (int i = index; i < movieCount; i++) {	
+			if (i == movieCount-1) {
+				movies[i] = null;
+				continue;
+				
+			}
+			movies[i] = movies[i+1];
+		}
 	}
 
 	/**
-	 * Find the best movie according to Rotten Tomato score and return it.
-	 * If the array is empty, meaning there are no movies, it returns null.
+	 * Find the best movie according to Rotten Tomato score and return it. If the
+	 * array is empty, meaning there are no movies, it returns null.
 	 * 
 	 * @return Movie or null
 	 */
-	public Movie findBestMovie(){
-		
-		//TODO
-		
+	public Movie findBestMovie() {
+		Movie highScore = null;
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
+			if (m == null) {
+				continue;	
+			}
+			if (highScore == null || m.getTomatoScore() > highScore.getTomatoScore()) {
+				highScore = m;
+			}
+			
+		}
+		return highScore;
 	}
 
 	/**
-	 * Print out all movies that are considered rotten in the array.
-	 * Remember you can use methods in the Movie class to determine this.
-	 * Refer to driver and handout for output format.
+	 * Print out all movies that are considered rotten in the array. Remember you
+	 * can use methods in the Movie class to determine this. Refer to driver and
+	 * handout for output format.
 	 * 
 	 */
-	public void moviesToAvoid(){
+	public void moviesToAvoid() {
+		int badMovies = 1;
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
 		
-		//TODO
-		
-	}
-
-
-	/**
-	 * Print out all movies that are considered fresh in the array.
-	 * Remember you can use methods in the Movie class to determine this.
-	 * Refer to driver and handout for output format.
-	 * 
-	 */
-	public void moviesToWatch(){
-
-		//TODO
-		
+			if (m == null) {
+				continue;	
+			}
+			if (!m.isFresh()) {
+				System.out.print("Movie " + (badMovies) + ":\n");
+				System.out.print(m.toString());
+				badMovies++;
+			}
+			
+		}	
 	}
 
 	/**
-	 * Print out all movies in the array.
-	 * You only need to print out the name of the movie, nothing more.
-	 * Refer to driver and handout for output format.
+	 * Print out all movies that are considered fresh in the array. Remember you can
+	 * use methods in the Movie class to determine this. Refer to driver and handout
+	 * for output format.
 	 * 
 	 */
-	public void printOutMovieList(){
+	public void moviesToWatch() {
+		int goodMovies = 1;
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
 		
-		//TODO
+			if (m == null) {
+				continue;	
+			}
+			if (m.isFresh()) {
+				System.out.print("Movie " + (goodMovies) + ":\n");
+				System.out.print(m.toString());
+				goodMovies++;
+			}
+		}	
+
+	}
+
+	/**
+	 * Print out all movies in the array. You only need to print out the name of the
+	 * movie, nothing more. Refer to driver and handout for output format.
+	 * 
+	 */
+	public void printOutMovieList() {
+
+		for (int i = 0; i < movieCount; i++) {
+			Movie m = movies[i];
 		
+			if (m == null) {
+				continue;	
+			}
+			
+			System.out.print("Movie " + (i+1) + ":" + m.getName() + "\n");
+				
+			
+		}	
+
 	}
 
 }
