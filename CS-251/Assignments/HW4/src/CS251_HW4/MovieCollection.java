@@ -28,7 +28,7 @@ public class MovieCollection {
 			if (m == null || m.equals(movie)) {
 				System.out.print("Error - movie alreay exists or movie is undefined.");
 				return false;
-				
+
 			}
 		}
 		movies[this.movieCount] = movie;
@@ -53,7 +53,7 @@ public class MovieCollection {
 			if (m == null || m.equals(movie)) {
 				System.out.print("Error - movie alreay exists or movie is undefined.");
 				return false;
-				
+
 			}
 		}
 		if (movies[index] != null) {
@@ -82,8 +82,8 @@ public class MovieCollection {
 	 * @return int
 	 */
 	public int findMovie(Movie movie) {
-		
-		for (int i = 0; i< movieCount; i++) {
+
+		for (int i = 0; i < movieCount; i++) {
 			Movie temp = movies[i];
 			if (movie.equals(temp)) {
 				return i;
@@ -92,7 +92,7 @@ public class MovieCollection {
 		return -1;
 	}
 
-	/** 
+	/**
 	 * @param index
 	 * @return Movie
 	 */
@@ -113,15 +113,15 @@ public class MovieCollection {
 			System.out.print("Error - Invalid Movie.");
 			return false;
 		}
-		boolean  movieRemoved = false;
+		boolean movieRemoved = false;
 		for (int i = 0; i < movieCount; i++) {
 			Movie m = movies[i];
 			if (m != null && m.equals(movie)) {
 				movieRemoved = true;
 
 				shiftCollectionLeft(i);
-			
-			}	
+
+			}
 		}
 		if (movieRemoved) {
 			movieCount--;
@@ -140,18 +140,16 @@ public class MovieCollection {
 			System.out.print("Error - Index is not in range.");
 			return null;
 		}
-		
+
 		Movie m = movies[index];
 		if (m != null) {
 			Movie retval = new Movie(m.getName(), m.getMinutes(), m.getTomatoScore());
 			shiftCollectionLeft(index);
 			movieCount--;
 			return retval;
-				
+
 		}
-	
-		
-		
+
 		return null;
 	}
 
@@ -159,14 +157,14 @@ public class MovieCollection {
 	 * @param index
 	 */
 	private void shiftCollectionLeft(int index) {
-		
-		for (int i = index; i < movieCount; i++) {	
-			if (i == movieCount-1) {
+
+		for (int i = index; i < movieCount; i++) {
+			if (i == movieCount - 1) {
 				movies[i] = null;
 				continue;
-				
+
 			}
-			movies[i] = movies[i+1];
+			movies[i] = movies[i + 1];
 		}
 	}
 
@@ -181,12 +179,12 @@ public class MovieCollection {
 		for (int i = 0; i < movieCount; i++) {
 			Movie m = movies[i];
 			if (m == null) {
-				continue;	
+				continue;
 			}
 			if (highScore == null || m.getTomatoScore() > highScore.getTomatoScore()) {
 				highScore = m;
 			}
-			
+
 		}
 		return highScore;
 	}
@@ -201,17 +199,17 @@ public class MovieCollection {
 		int badMovies = 1;
 		for (int i = 0; i < movieCount; i++) {
 			Movie m = movies[i];
-		
+
 			if (m == null) {
-				continue;	
+				continue;
 			}
 			if (!m.isFresh()) {
 				System.out.print("Movie " + (badMovies) + ":\n");
 				System.out.print(m.toString());
 				badMovies++;
 			}
-			
-		}	
+
+		}
 	}
 
 	/**
@@ -224,16 +222,16 @@ public class MovieCollection {
 		int goodMovies = 1;
 		for (int i = 0; i < movieCount; i++) {
 			Movie m = movies[i];
-		
+
 			if (m == null) {
-				continue;	
+				continue;
 			}
 			if (m.isFresh()) {
 				System.out.print("Movie " + (goodMovies) + ":\n");
 				System.out.print(m.toString());
 				goodMovies++;
 			}
-		}	
+		}
 
 	}
 
@@ -246,15 +244,14 @@ public class MovieCollection {
 
 		for (int i = 0; i < movieCount; i++) {
 			Movie m = movies[i];
-		
+
 			if (m == null) {
-				continue;	
+				continue;
 			}
-			
-			System.out.print("Movie " + (i+1) + ":" + m.getName() + "\n");
-				
-			
-		}	
+
+			System.out.print("Movie " + (i + 1) + ":" + m.getName() + "\n");
+
+		}
 
 	}
 

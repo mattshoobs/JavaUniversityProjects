@@ -39,15 +39,15 @@ public class Movie {
 	public String toString() {
 		String fresh = this.isFresh() ? "Fresh" : "Rotten";
 		return "Name: " + this.name + "\n Length: " + this.convertMin() + "\n" + "Tomato Score: " + fresh + "\n";
-	
+
 	}
-	
+
 	private String convertMin() {
-		int hours = this.minutes/ 60;
-		int min = this.minutes - 60*hours;
+		int hours = this.minutes / 60;
+		int min = this.minutes - 60 * hours;
 		return hours + " hrs " + min + " min";
 	}
-	
+
 	public boolean equals(Object other) {
 		if (other instanceof Movie) {
 			Movie movie = (Movie) other;
