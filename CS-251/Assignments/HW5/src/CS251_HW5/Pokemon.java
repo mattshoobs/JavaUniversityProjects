@@ -8,6 +8,7 @@ public abstract class Pokemon {
 	protected int level;
 	
 	
+	
 	public Pokemon() {
 		this("Ditto", 50, 10, 7);
 		
@@ -21,42 +22,66 @@ public abstract class Pokemon {
 	}
 
 	public int getHealth() {
-		return health;
+		return this.health;
 	}
 
 	public void setHealth(int health) {
+		if (health < 0) {
+			return;
+		}
 		this.health = health;
 	}
 
 	public int getPower() {
-		return power;
+		return this.power;
 	}
 
 	public void setPower(int power) {
+		if (power < 0) {
+			return;
+		}
+		
 		this.power = power;
 	}
 
 	public int getLevel() {
-		return level;
+		return this.level;
 	}
 
 	public void setLevel(int level) {
+		if (level < 0) {
+			return;
+		}
 		this.level = level;
 	}
-
+ 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	
 	public boolean isDefeated() {
-		
+		if (getHealth() > 0) {
+			return false;
+		}
+		return true;
 	}
 	
 	protected void hurt(int damage) {
+		if (damage < 0) {
+			return;
+		}
+		if ((this.health - damage) < 0) {
+			setHealth(0);
+			
+			
+		}
+		setHealth(this.health - damage);
 		
 	}
 	
-	public void abstract specialAttack(Pokemon target);
+	public abstract void specialAttack(Pokemon target);
+	
+	public abstract void physicalAttack(Pokemon target);
 	
 	
 	
