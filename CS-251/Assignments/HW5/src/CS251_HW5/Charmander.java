@@ -31,7 +31,11 @@ public class Charmander extends Pokemon {
 	}
 	
 	public boolean equals(Object other) {
-		
+		if (other instanceof Pokemon) {
+			Pokemon p = (Pokemon) other;
+			
+			if ( thi)
+		}
 	}
 	
 	public String toString() {
