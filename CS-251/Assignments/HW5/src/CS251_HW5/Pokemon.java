@@ -16,20 +16,17 @@ public abstract class Pokemon {
 		this.name = name;
 		if (health < 0) {
 			this.health = 0;
-		}
-		else {
+		} else {
 			this.health = health;
 		}
 		if (power < 0) {
 			this.power = 0;
-		}
-		else {
+		} else {
 			this.power = power;
 		}
 		if (level < 0) {
 			this.level = 0;
-		}
-		else {
+		} else {
 			this.level = level;
 		}
 	}

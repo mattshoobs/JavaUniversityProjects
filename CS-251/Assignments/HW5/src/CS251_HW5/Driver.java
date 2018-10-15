@@ -90,10 +90,10 @@ public class Driver {
 		// TODO
 		if (name.equalsIgnoreCase("Pikachu")) {
 			pokemon = new Pikachu(health, power, level);
-			
+
 		} else if (name.equalsIgnoreCase("Charmander")) {
 			pokemon = new Charmander(health, power, level);
-		
+
 		}
 		return pokemon;
 	}

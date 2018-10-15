@@ -1,8 +1,6 @@
 package CS251_HW5;
 
-
 import static org.junit.Assert.*;
-
 
 import org.junit.*;
 
@@ -111,7 +109,6 @@ public class testing {
 
 	}
 
-	
 	@Test
 	public void TestSetters1() {
 
@@ -122,12 +119,12 @@ public class testing {
 		assertEquals(6, e.getLevel());
 
 		e.setHealth(-4);
-		assertEquals(20,e.getHealth());
-		
+		assertEquals(20, e.getHealth());
+
 		d.specialAttack(e);
 		assertEquals(15, e.getHealth());
 		assertEquals(0, d.getPower());// d lost power since he attacked e
-										
+
 		assertEquals("Charmander", e.getName());
 		;
 
@@ -135,22 +132,22 @@ public class testing {
 
 	@Test
 	public void TestSetters2() {
-		
+
 		d.setPower(-1);
 		assertEquals(5, d.getPower());
 
 		d.setLevel(-6);
 		assertEquals(3, d.getLevel());
-		
+
 		d.setHealth(-10);
-		assertEquals(3,d.getHealth());
-		
+		assertEquals(3, d.getHealth());
+
 		f.setHealth(5);
-		assertEquals(10,f.getHealth());
+		assertEquals(10, f.getHealth());
 
 		f.specialAttack(d);
 		assertEquals(0, d.getHealth());
-		assertEquals(0, f.getPower());// f lost power since f attacked d 
+		assertEquals(0, f.getPower());// f lost power since f attacked d
 
 		assertEquals("Pikachu", d.getName());
 
@@ -158,27 +155,27 @@ public class testing {
 
 	@Test
 	public void TestIsDefeated() {
-		
-		//h = new Pikachu(1, 10, 10);
-		//i = new Charmander(10, 20, 5);
-		
+
+		// h = new Pikachu(1, 10, 10);
+		// i = new Charmander(10, 20, 5);
+
 		assertFalse(h.isDefeated());
 		i.specialAttack(h);
 		assertTrue(h.isDefeated());
 		h.specialAttack(i);
-		assertEquals(10, i.getHealth());//h is dead, so it can not attack and should not damage
-		assertEquals(10, h.getPower());//h is dead, so h power should be the same
+		assertEquals(10, i.getHealth());// h is dead, so it can not attack and should not damage
+		assertEquals(10, h.getPower());// h is dead, so h power should be the same
 		h.physicalAttack(i);
-		assertEquals(10, i.getHealth());//h can not attack
+		assertEquals(10, i.getHealth());// h can not attack
 		i.specialAttack(h);
-		assertEquals(15, i.getPower());//i can not attack something that is dead, so power should remain
-		
+		assertEquals(15, i.getPower());// i can not attack something that is dead, so power should remain
+
 	}
-	
-	
-/*	j = new Pikachu(100, 8, 10);
-	k = new Charmander(100, 7, 5);*/
-	
+
+	/*
+	 * j = new Pikachu(100, 8, 10); k = new Charmander(100, 7, 5);
+	 */
+
 	@Test
 	public void TestAttacks() {
 		j.specialAttack(k);
@@ -186,7 +183,7 @@ public class testing {
 
 		j.specialAttack(k);
 		assertEquals(92, k.getHealth());
-		
+
 		j.specialAttack(k);
 		assertEquals(89, k.getHealth());
 
@@ -195,21 +192,21 @@ public class testing {
 
 		k.specialAttack(j);
 		assertEquals(95, j.getHealth());
-		
+
 		k.specialAttack(j);
 		assertEquals(93, j.getHealth());
-		
+
 		k.specialAttack(j);
 		assertEquals(89, j.getHealth());
 
 		k.physicalAttack(j);
 		assertEquals(85, j.getHealth());
-		
+
 		assertEquals(0, j.getPower());
 		assertEquals(0, k.getPower());
-		
+
 	}
-	
+
 	@Test
 	public void TestEquals() {
 		assertEquals(true, e.equals(e));
@@ -234,7 +231,7 @@ public class testing {
 
 		assertEquals(Pikachu.class, p1.getClass());
 		assertEquals(Charmander.class, p2.getClass());
-		assertEquals(true, p3==null);
+		assertEquals(true, p3 == null);
 
 	}
 
