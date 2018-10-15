@@ -12,7 +12,7 @@ public class Pikachu extends Pokemon {
 
 	@Override
 	public void specialAttack(Pokemon target) {
-		if (target.isDefeated()) {
+		if (target.isDefeated() || this.isDefeated()) {
 			return;
 		} else if (getPower() == 0) {
 			physicalAttack(target);
@@ -20,13 +20,16 @@ public class Pikachu extends Pokemon {
 			target.hurt(getPower());
 			setPower(0);
 		}
-		target.hurt(thunderBolt);
-		setPower((getPower() - thunderBolt));
+
+		else {
+			target.hurt(thunderBolt);
+			setPower((getPower() - thunderBolt));
+		}
 	}
 
 	@Override
 	public void physicalAttack(Pokemon target) {
-		if (target.isDefeated()) {
+		if (target.isDefeated() || this.isDefeated()) {
 			return;
 		}
 		target.hurt(swipe);

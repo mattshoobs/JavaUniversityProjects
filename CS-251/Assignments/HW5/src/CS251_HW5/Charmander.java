@@ -12,21 +12,23 @@ public class Charmander extends Pokemon {
 
 	@Override
 	public void specialAttack(Pokemon target) {
-		if (target.isDefeated()) {
+		if (target.isDefeated() || this.isDefeated()) {
 			return;
 		} else if (getPower() == 0) {
 			physicalAttack(target);
 		} else if (getPower() < fireBall) {
 			target.hurt(getPower());
 			setPower(0);
+		} else {
+			target.hurt(fireBall);
+			setPower((getPower() - fireBall));
 		}
-		target.hurt(fireBall);
-		setPower((getPower() - fireBall));
+
 	}
 
 	@Override
 	public void physicalAttack(Pokemon target) {
-		if (target.isDefeated()) {
+		if (target.isDefeated() || this.isDefeated()) {
 			return;
 		}
 		target.hurt(bite);
