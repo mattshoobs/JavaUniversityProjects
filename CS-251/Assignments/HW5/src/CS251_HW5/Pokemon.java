@@ -7,9 +7,6 @@ public abstract class Pokemon {
 	protected int power;
 	protected int level;
 	
-	protected String[] team;
-	
-	
 	public Pokemon() {
 		this("Ditto", 50, 10, 7);
 		

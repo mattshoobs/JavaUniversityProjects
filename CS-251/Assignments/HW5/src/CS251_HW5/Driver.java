@@ -9,9 +9,31 @@ public class Driver {
 		Scanner stdIn = new Scanner(System.in);
 
 		Pokemon pokemon = null;
+		
 
 		for (int i = 0; i < arrOfPokemons.length; i++) {
-
+			while (true) {
+				System.out.println("Enter name, health, power, and level for Pokemon#0: ");
+			String input = stdIn.nextLine();
+			String[] pokie = input.split(" ");
+			
+			for (i = 0; i < arrOfPokemons.length; i++)
+				if (pokemon.equals(arrOfPokemons[i]) ) {
+				break;	
+				}
+			if (pokie[0].equalsIgnoreCase("Pikachu")) {
+				pokemon = new Pikachu(Integer.parseInt(pokie[1]),Integer.parseInt(pokie[2]),Integer.parseInt(pokie[3]));
+				break;
+			}
+			else if (pokie[0].equalsIgnoreCase("Charmander")) {
+				pokemon = new Charmander(Integer.parseInt(pokie[1]),Integer.parseInt(pokie[2]),Integer.parseInt(pokie[3]));
+				break;
+			}
+			
+			}
+			
+					arrOfPokemons[i] = pokemon;
+	
 			//TODO
 			//Read input from user.
 			//Create a pokemon and add it to the array if it is not a duplicate.

@@ -5,6 +5,11 @@ public class Charmander extends Pokemon {
 	protected static final int fireBall = 5;
 	protected static final int bite = 4;
 
+	public Charmander(int health, int power, int level) {
+		super("Charmander", health, power, level);
+		
+	}
+	
 	@Override
 	public void specialAttack(Pokemon target) {
 		if (target.isDefeated()) {
@@ -31,15 +36,18 @@ public class Charmander extends Pokemon {
 	}
 	
 	public boolean equals(Object other) {
-		if (other instanceof Pokemon) {
+		if (other instanceof Charmander) {
 			Pokemon p = (Pokemon) other;
-			
-			if ( thi)
+				if (p != null &&  p.getName().equalsIgnoreCase(this.name) && p.getHealth() == this.health && p.getPower() == this.power && p.getLevel() == this.level) {
+					return true;
+				}
+				return false;
+			}
+			return false;
 		}
-	}
 	
 	public String toString() {
-		System.out.println(");
+		return "Name: " + this.getName() + ", Health: " + this.getHealth() + ", Power: " + this.getPower() + ", Level: " + this.getLevel();
 	}
 	
 }
