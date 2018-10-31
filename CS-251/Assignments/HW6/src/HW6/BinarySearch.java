@@ -1,6 +1,7 @@
 package HW6;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class BinarySearch {
 
@@ -90,7 +91,16 @@ public class BinarySearch {
 	public static void randomize(int[] array) {
 		
 		//TODO
-		
+		Random rand = new Random();
+		int swaps = 0;
+		while ( swaps < array.length/2) { 
+			int rand1 = rand.nextInt(array.length-1);
+			int rand2 = rand.nextInt(array.length-1);
+			int temp = array[rand1];
+			array[rand1] = array[rand2];
+			array[rand2] = temp;
+			swaps++;
+		}
 	}
 	
 	/**

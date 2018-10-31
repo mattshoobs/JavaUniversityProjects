@@ -264,7 +264,17 @@ public class MovieCollection {
 	public void sortByName() {
 
 		//TODO
-
+		for (int i = 0; i < movies.length-1; i++) {
+			int minIndex = i;
+			for (int j = i+1; j < movies.length; j++) {
+				if(movies[j].getName().compareTo(movies[i].getName()) > 0) {
+					minIndex = j;
+				}
+				Movie temp = movies[minIndex];
+				movies[minIndex] = movies[i];
+				movies[i] = temp;
+			}
+		}
 	}
 
 	
@@ -275,6 +285,16 @@ public class MovieCollection {
 	public void sortByTomatoScore() {
 
 		//TODO
+		for (int i = 1; i < movies.length; i++) {
+			int j = i;
+			while (j > 0 && movies[j-1].getTomatoScore() < movies[j].getTomatoScore()) {
+				Movie temp = movies[j-1];
+				movies[j-1] = movies[j];
+				movies[j] = temp;
+				j--;
+			}
+			
+		}
 		
 	}
 	
@@ -286,7 +306,15 @@ public class MovieCollection {
 	public void sortByLength() {
 
 		//TODO
-		
+		for (int i = 1; i < movies.length; i++) {
+			int j = i;
+			while (j > 0 && movies[j-1].getMinutes() < movies[j].getMinutes()) {
+				Movie temp = movies[j-1];
+				movies[j-1] = movies[j];
+				movies[j] = temp;
+				j--;
+			}
+		}
 	}
 	
 }
