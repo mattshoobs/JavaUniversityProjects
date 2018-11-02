@@ -1,0 +1,11 @@
+Analyzing Runtimes 
+Using the MovieCollection class I provided plus the methods you implemented above in MovieCollection, give the Big O notation for each method listed below. Provide your answers directly in the D2L dropbox for the questions below when submitting. Undergraduate Students – Answer questions 1 – 8.
+
+1. MovieCollection() ___O(1)________________ 
+2. getTotalMovies() ____ O(1)_______________ 
+3. addMovie(Movie movie) ____O(n)_______________ 
+4. findMovie(Movie movie) _____O(n)______________ 
+5. removeMovie(Movie movie) ____O(n)_______________ 
+6. shiftCollectionLeft(int index) ___O(n)________________ 
+7. moviesToAvoid() ____O(n)_______________ 
+8. sortByName() ____O(n^2)_______________

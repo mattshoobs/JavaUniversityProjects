@@ -264,10 +264,10 @@ public class MovieCollection {
 	public void sortByName() {
 
 		//TODO
-		for (int i = 0; i < movies.length-1; i++) {
+		for (int i = 0; i < this.getTotalMovies(); i++) {
 			int minIndex = i;
-			for (int j = i+1; j < movies.length; j++) {
-				if(movies[j].getName().compareTo(movies[i].getName()) > 0) {
+			for (int j = i+1; j < this.getTotalMovies(); j++) {
+				if(movies[i].getName().compareTo(movies[j].getName()) > 0) {
 					minIndex = j;
 				}
 				Movie temp = movies[minIndex];
@@ -285,7 +285,7 @@ public class MovieCollection {
 	public void sortByTomatoScore() {
 
 		//TODO
-		for (int i = 1; i < movies.length; i++) {
+		for (int i = 1; i < this.getTotalMovies(); i++) {
 			int j = i;
 			while (j > 0 && movies[j-1].getTomatoScore() < movies[j].getTomatoScore()) {
 				Movie temp = movies[j-1];
@@ -306,9 +306,9 @@ public class MovieCollection {
 	public void sortByLength() {
 
 		//TODO
-		for (int i = 1; i < movies.length; i++) {
+		for (int i = 1; i < this.getTotalMovies(); i++) {
 			int j = i;
-			while (j > 0 && movies[j-1].getMinutes() < movies[j].getMinutes()) {
+			while (j > 0 && movies[j-1].getMinutes() > movies[j].getMinutes()) {
 				Movie temp = movies[j-1];
 				movies[j-1] = movies[j];
 				movies[j] = temp;
