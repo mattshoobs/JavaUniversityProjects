@@ -1,5 +1,7 @@
 package hw7;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Sets {
@@ -13,6 +15,8 @@ public class Sets {
 	 */
 	public static boolean isElement(Integer i, List<Integer> list) {
 		//TODO
+		return list.contains(i);
+		
 	}
 	
 	/**
@@ -26,6 +30,16 @@ public class Sets {
 	 */
 	public static boolean isSubset(List<Integer> list1, List<Integer> list2) {
 		//TODO
+		
+		if (list2 == null) {
+			return false;
+		}
+		for (Integer num : list1) {
+			if (!list2.contains(num)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -39,6 +53,16 @@ public class Sets {
 	 */
 	public static boolean isSuperSet(List<Integer> list1, List<Integer> list2) {
 		//TODO
+		if (list1 == null) {
+			return false;
+		}
+		for (Integer num : list2) {
+			if (!list1.contains(num)) {
+				return false;
+			}
+		}
+		return true;
+		
 	}
 	
 	
@@ -55,6 +79,19 @@ public class Sets {
 	 */
 	public static List<Integer> union(List<Integer> list1, List<Integer> list2){
 		//TODO
+		ArrayList<Integer> list = new ArrayList<Integer>(list1.size() + list2.size());
+		
+		for(Integer num : list1) {
+			list.add(num);
+		}
+		for(Integer num : list2) {
+			if(!list.contains(num)) {
+				list.add(num);
+			}
+		}
+		Collections.sort(list);
+		return list;
+		
 	}
 	
 	/**
@@ -68,6 +105,16 @@ public class Sets {
 	 */
 	public static List<Integer> intersection(List<Integer> list1,List<Integer> list2){
 		//TODO
+		ArrayList<Integer> list = new ArrayList<Integer>(list1.size() + list2.size());
+		
+		for(Integer num : list1) {
+			if(list2.contains(num)) {
+				list.add(num);
+			}
+		}
+	
+		Collections.sort(list);
+		return list;
 	}
 	
 	/**
@@ -81,6 +128,16 @@ public class Sets {
 	 */
 	public static List<Integer> subtract(List<Integer> list1, List<Integer> list2){
 		//TODO
+		ArrayList<Integer> list = new ArrayList<Integer>(list1.size() + list2.size());
+		
+		for(Integer num : list1) {
+			if(!list2.contains(num)) {
+				list.add(num);
+			}
+		}
+	
+		Collections.sort(list);
+		return list;
 	}
 	
 	/**
@@ -93,6 +150,17 @@ public class Sets {
 	 */
 	public static boolean equals(List<Integer> list1, List<Integer> list2) {
 		//TODO
+		if (list1.size() != list2.size()) {
+			return false;
+		}
+		for(int i = 0; i < list1.size(); i++) {
+			if (!list2.contains(list1.get(i))) {
+				return false;
+			}
+		}
+		return true;
+		
+		
 	}
 	
 	/**
@@ -110,6 +178,26 @@ public class Sets {
 	 */
 	public static List<String> cartesianProduct(List<Integer> list1, List<Integer> list2){
 		//TODO
+		if (list1 == null 
+				|| list2 == null 
+				|| (list1.size() == 0) 
+				|| (list2.size() == 0)) {
+			ArrayList<String> list = new ArrayList<String>(1);
+			list.add("");
+			return list;
+		}
+		Collections.sort(list1);
+		Collections.sort(list2);
+		ArrayList<String> list = new ArrayList<String>(list1.size() * list2.size());
+		
+		for(int i = 0; i < list1.size(); i++) {
+			for(int j = 0; j < list2.size(); j++) {
+				list.add("(" + list1.get(i) + "," + list2.get(j) + ")");	
+			}
+		}
+	
+		
+		return list;
 	}
 	
 	
@@ -121,6 +209,7 @@ public class Sets {
 	 */
 	public static void sort(List<Integer> list) {
 		//TODO
+		Collections.sort(list);
 	}
 	
 }
