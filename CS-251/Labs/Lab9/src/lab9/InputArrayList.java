@@ -16,7 +16,7 @@ public class InputArrayList {
 			System.out.println("\nEnter some text or (quit) to stop: ");
 			String userInput = reader.next();
 			int count = 0;	
-			if (userInput.equals("quit")) {
+			if (userInput.equalsIgnoreCase("quit")) {
 				run = false;
 				System.out.println("Goodbye!");
 				break;
@@ -25,13 +25,11 @@ public class InputArrayList {
 			input.add(userInput);
 			
 			for (String s : input) {
-				if(userInput.equals(s)) {
+				if(userInput.equalsIgnoreCase(s)) {
 					count++;
 				}
 			}
 			System.out.println("You have entered \"" + userInput + "\" " + count + " time(s).");	
-		}	
-		reader.close();
+		}
 	}
-	
 }

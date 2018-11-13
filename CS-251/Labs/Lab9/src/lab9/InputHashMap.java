@@ -15,9 +15,9 @@ public class InputHashMap {
 		
 		while (run) {
 			System.out.println("\nEnter some text or (quit) to stop: ");
-			String userInput = reader.next();
+			String userInput = reader.next().toLowerCase();
 			
-			if (userInput.equals("quit")) {
+			if (userInput.equalsIgnoreCase("quit")) {
 				run = false;
 				System.out.println("Goodbye!");
 				break;
