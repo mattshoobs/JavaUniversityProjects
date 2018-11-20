@@ -1,4 +1,4 @@
-
+package lab10;
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -35,6 +35,27 @@ public class JUnit {
 		a.addMovie(oceans8);
 		a.addMovie(happytimeMurders);
 		
+		try {
+			a.removeMovieAt(-1);
+		}
+		catch(InvalidRemoveMovieAtIndexException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		
+		try {
+			a.addMovieAt(crazyRichAsians, -1);
+		}
+		catch(InvalidAddMovieAtException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			a.getMovieAt(-1);
+		}
+		catch(InvalidGetMovieAtException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 }

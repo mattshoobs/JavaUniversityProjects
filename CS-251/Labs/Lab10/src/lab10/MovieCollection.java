@@ -1,4 +1,4 @@
-
+package lab10;
 
 public class MovieCollection {
 
@@ -70,6 +70,9 @@ public class MovieCollection {
 			movies[index] = movie;
 			movieCount++;
 		}
+		else {
+			throw new InvalidAddMovieAtException("Invalid index for addMovieAt.");
+		}
 
 	}
 
@@ -123,7 +126,8 @@ public class MovieCollection {
 	public Movie getMovieAt(int index) {
 		
 		if(index >= movieCount || index < 0) {
-			return null;
+			throw new InvalidGetMovieAtException("Invalid index for getMovieAt");
+			
 		}
 		
 		return movies[index];
@@ -164,7 +168,7 @@ public class MovieCollection {
 	public Movie removeMovieAt(int index) {
 		
 		if(index >= movieCount || index < 0) {
-			return null;
+			throw new InvalidRemoveMovieAtIndexException("Invalid index for removeMovieAt.");
 		}
 
 		Movie movieToReturn = movies[index];
