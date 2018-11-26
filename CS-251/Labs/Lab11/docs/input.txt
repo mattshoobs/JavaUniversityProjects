@@ -1,0 +1,4 @@
+examplestring:0:5
+examplestring:7:2
+examplestring:45:78
+.readingandwriting files!!:11:25
