@@ -3,13 +3,23 @@ package hw8;
 //TODO
 //Import all necessary libraries.
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Token {
 
+	private String token;
+	private Map<Document, List<Integer>> positionalIndex;
 	
 	public Token(String str) {
 		//TODO
 		//Declare all instance variables
 		//Set the variables.
+		this.token = str;
+		positionalIndex = new HashMap<Document, List<Integer>>();
+		
 	}
 	
 	/**
@@ -22,6 +32,8 @@ public class Token {
 	public List<Integer> getPositions(Document doc){
 		
 		//TODO - getPositions
+		
+		return positionalIndex.get(doc);
 		
 	}
 
@@ -38,23 +50,35 @@ public class Token {
 	public void setPositions(Document doc, Integer p) {
 		
 		//TODO - setPostions
-
+		if (positionalIndex.containsKey(doc) && !(positionalIndex.get(doc).contains(p))) {
+			positionalIndex.get(doc).add(p);
+		}
+		else if(!(positionalIndex.containsKey(doc))) {
+			List<Integer> tempList = new ArrayList<Integer>();
+			tempList.add(p);
+			
+			positionalIndex.put(doc, tempList);
+		}
 	}
 
 	@Override
 	public String toString() {
-		
 		//TODO - toString
 		//toString only returns the String instance variable.
-		
+		return token;
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		
 		//TODO - equals method
 		//equals only checks if the passed in Object is a Token and the String variables match.
 		
+		if (o instanceof Token) {
+			if (((Token) o).toString().equals(this.token)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

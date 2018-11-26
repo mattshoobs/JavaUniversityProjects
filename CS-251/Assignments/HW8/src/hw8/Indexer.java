@@ -1,4 +1,10 @@
 package hw8;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 //TODO
 //Import all necessary libraries.
 
@@ -17,11 +23,28 @@ public class Indexer {
 	 * 								-Should increment with each new document created
 	 * 								-First document added will always get ID of 1
 	 */
-
+	private Map<Token, List<Document>> reversedIndex;
+	
+	private Map<String, Token> allTokens;
+	
+	private Map<String, Document> allDocs;
+	
+	private List<Document> allDocsSorted;
+	
+	private int assignID;
+	
+	
+	
 	public Indexer() {
 		//TODO
 		//Declare all instance variables
 		//What should each variable be initialized to?
+		reversedIndex = new HashMap<Token, List<Document>>();
+		allTokens = new HashMap<String, Token>();
+		allDocs = new HashMap<String, Document>();
+		allDocsSorted = new ArrayList<Document>();
+		assignID = 1;
+		
 	}
 	
 	
@@ -43,9 +66,35 @@ public class Indexer {
 	 * @param docString
 	 */
 	public void indexDocument(String docString) {
-
 		//TODO - indexDocument
-
+		String name;
+		if (!docString.contains("<") && !docString.contains(">")) {
+			return;
+		}
+		name = docString.substring(docString.indexOf("<")+1, docString.indexOf(">"));
+		
+		if (allDocs.containsKey(name)) {
+			return;
+		}
+		Document tempDoc = new Document (assignID, name);
+		assignID++;
+		allDocs.put(name, tempDoc);
+		allDocsSorted.add(tempDoc);
+	
+		String contents = docString.substring(docString.indexOf(">")+1).trim();
+		
+		String[] tokens = contents.split(" ");
+		
+		for (int i = 0; i<tokens.length;i++) {
+			tokens[i] = removePunctuation(tokens[i]);
+			Token tempToken = checkToken(tokens[i]);
+			checkToken_Document(tempToken, tempDoc);
+			tempToken.setPositions(tempDoc, i+1);
+		}
+		
+		
+		
+		
 	}
 
 	
@@ -58,8 +107,8 @@ public class Indexer {
 	 * @return a formatted String
 	 */
 	protected String removePunctuation(String str) {
-		
 		//TODO - removePunctuation
+		return str.trim().toLowerCase().replace("!","").replace("?","").replace(".","").replace(",","");
 		
 	}
 	
@@ -75,7 +124,12 @@ public class Indexer {
 	protected Token checkToken(String str) {
 
 		//TODO - checkToken
-		
+		if (!allTokens.containsKey(str)) {
+			Token tempToken = new Token(str);
+			allTokens.put(str, tempToken);
+			return tempToken;
+		}
+		return allTokens.get(str);
 	}
 	
 	/**
@@ -92,9 +146,20 @@ public class Indexer {
 	 * @return a List of Documents with the passed in Document possibly added to the List.
 	 */
 	protected List<Document> checkToken_Document(Token token, Document doc){
-		
 		//TODO - checkToken
+		List<Document> tempList = new ArrayList<Document>(); 
+		if (!reversedIndex.containsKey(token)) {
+			tempList.add(doc);
+			reversedIndex.put(token, tempList);
 		
+		}
+		else {
+			tempList = reversedIndex.get(token);
+			if (!tempList.contains(doc)) {
+				tempList.add(doc);
+			}
+		}
+		return tempList;
 	}
 	
 	
@@ -110,9 +175,19 @@ public class Indexer {
 	 * @param query
 	 */
 	public void singleQuery(String query) {
-		
 		//TODO - singleQuery
-		
+		System.out.println("\nSingle Query: " + query);
+		if (!allTokens.containsKey(query)) {
+			System.out.println("Query not found!");
+			return;
+		}
+		Token tempToken = allTokens.get(query);
+		System.out.println("Documents containing \"" + query + "\": " + reversedIndex.get(tempToken));
+		for ( int i = 0; i<reversedIndex.get(tempToken).size(); i++) {
+			Document tempDoc = reversedIndex.get(tempToken).get(i);
+			System.out.println("Doc ID: " + tempDoc.getID() + ", DocPositions: " + tempToken.getPositions(tempDoc) + "\n");
+		}
+			
 	}
 	
 	/**
@@ -140,6 +215,10 @@ public class Indexer {
 	public void printOutAllDocs() {
 		
 		//TODO - printOutAllDocs
+		for ( int i = 0; i<allDocsSorted.size(); i++) {
+			Document tempDoc = allDocsSorted.get(i);
+			System.out.println("Doc ID: " + tempDoc.getID() + ", DocName: " + tempDoc.getName());
+		}
 	
 	}
 	
