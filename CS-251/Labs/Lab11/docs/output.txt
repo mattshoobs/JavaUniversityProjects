@@ -1,0 +1,4 @@
+examp
+i > j, invalid indicies.
+i or j are larger than string length
+writing files!
