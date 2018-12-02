@@ -22,7 +22,18 @@ public class FileIO {
 	public static void stretch(String inFile, String outFile) {
 		System.out.println("stretch opening files " + inFile + ", " + outFile);
 		
-		//TODO
+		try(Scanner scr = new Scanner(new File("./docs/" + inFile));
+				PrintWriter pw = new PrintWriter("./docs/" + outFile)) {
+				while(scr.hasNextLine()) {
+					String inLine = scr.nextLine();
+					FileParser f = new FileParser(inLine);
+					pw.println(f.parse());
+				}
+				System.out.print("File writing complete! \nThe output file is located in \"./docs/" + outFile + "\"");
+			} 
+			catch (FileNotFoundException e) {
+				System.out.print("File Not Found");
+			}
 		
 		System.out.println("stretch finished");
 	}
