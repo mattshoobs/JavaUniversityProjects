@@ -13,13 +13,13 @@ import javax.swing.JPanel;
 public class ControlPanel extends JPanel {
 
 	
-	JLabel yellowCount;
-	JLabel yVal;
-	JLabel blackCount;
-	JLabel bVal;
-	JButton reset;
-	JLabel win;
-	GameBoard gb;
+	private JLabel yellowCount;
+	private JLabel yVal;
+	private JLabel blackCount;
+	private JLabel bVal;
+	private JButton reset;
+	private JLabel win;
+	private GameBoard gb;
 	
 	//TODO
 	public ControlPanel(GameBoard gb) {
@@ -33,9 +33,9 @@ public class ControlPanel extends JPanel {
 		//this = new JPanel();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		yellowCount = new JLabel("Yellow Count");
-		yVal = new JLabel("" + gb.yCount);
+		yVal = new JLabel("" + gb.getYellowCount());
 		blackCount = new JLabel("Black Count");
-		bVal = new JLabel("" + gb.bCount);
+		bVal = new JLabel("" + gb.getBlackCount());
 		win = new JLabel("You Win!");
 		reset = new JButton("Reset");
 		reset.addActionListener(new resetButtonClick());
@@ -51,6 +51,23 @@ public class ControlPanel extends JPanel {
 		
 	}
 	
+	public void setbValText(int bCount) {
+		bVal.setText("" + bCount);
+		
+	}
+	
+	public void setyValText(int yCount) {
+		yVal.setText("" + yCount);
+	}
+	
+	public void showWin(boolean showWin) {
+		if (showWin) {
+			win.setVisible(true);
+		}
+		else {
+			win.setVisible(false);
+		}
+	}
 	
 	public class resetButtonClick implements ActionListener{
 

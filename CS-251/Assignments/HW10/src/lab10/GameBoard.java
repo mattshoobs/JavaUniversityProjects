@@ -15,11 +15,10 @@ public class GameBoard extends JPanel {
 	public int gridSizeCol = 8;
 	public int gridSizeRow = 8;
 	private LightsOutCircle[][] gridCopy = new LightsOutCircle[gridSizeCol][gridSizeRow];
-	int yCount = 64;
-	int bCount = 0;
-	ControlPanel cp;
+	private int yCount = 64;
+	private int bCount = 0;
+	private ControlPanel cp;
 	
-	LightsOutCircle lastButton = null;
 	
 	public GameBoard() {
 		
@@ -27,6 +26,9 @@ public class GameBoard extends JPanel {
 		createContents();
 		setVisible(true);	
 		
+	}
+	public void setCP(ControlPanel cp) {
+		this.cp = cp;
 	}
 	
 	public void createContents () {
@@ -55,9 +57,9 @@ public class GameBoard extends JPanel {
 		}
 		yCount = 64;
 		bCount = 0;
-		cp.bVal.setText("" + bCount);
-		cp.yVal.setText("" + yCount);
-		cp.win.setVisible(false);
+		cp.setbValText(bCount);
+		cp.setyValText(yCount);
+		cp.showWin(false);
 	}
 	
 	public class circleClick implements ActionListener{
@@ -94,7 +96,7 @@ public class GameBoard extends JPanel {
 
 			if (bCount == 64) {
 				
-				cp.win.setVisible(true);
+				cp.showWin(true);
 				
 				for (int i = 0; i < 8; i++) {
 					for (int x = 0; x < 8; x++) {
@@ -122,9 +124,17 @@ public class GameBoard extends JPanel {
 			bCount++;
 		}
 		
-		cp.bVal.setText("" + bCount);
-		cp.yVal.setText("" + yCount);
+		cp.setbValText(bCount);
+		cp.setyValText(yCount);
 		
+	}
+	
+	public int getYellowCount() {
+		return yCount;
+	}
+	
+	public int getBlackCount() {
+		return bCount;
 	}
 	
 	
