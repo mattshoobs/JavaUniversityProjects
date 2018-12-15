@@ -20,7 +20,8 @@ public class LightsOut extends JFrame {
 			setLocationRelativeTo(null);
 			gb = new GameBoard();
 			cp = new ControlPanel(gb);
-			gb.cp = cp;
+			gb.setCP(cp);
+			
 			
 			add(gb, BorderLayout.CENTER);
 			add(cp, BorderLayout.EAST);
